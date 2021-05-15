@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as an
 
-nx=401 #number of x cells
+nx=101 #number of x cells
 ny=11 #number of y cells
 tstop=0.2 #end time
 gamma=1.4 #heat capacity ratio for a diatomic gas
@@ -47,6 +47,7 @@ fluxytotplus=np.zeros((ny,nx,4))
 fluxxtotminus=np.zeros((ny,nx,4))
 fluxytotminus=np.zeros((ny,nx,4))
 
+#Cell flux in x direction
 def fluxx(w):
     Fx=np.zeros((ny,nx,4))
     for i in range(0,nx):
@@ -57,6 +58,7 @@ def fluxx(w):
             Fx[j][i][3]=w[j][i][1]/w[j][i][0]*(w[j][i][3]+(gamma-1)*(w[j][i][3]-0.5*w[j][i][1]**2/w[j][i][0]-0.5*w[j][i][2]**2/w[j][i][0]))
     return Fx
 
+#Cell flux in y direction
 def fluxy(w):
     Fy=np.zeros((ny,nx,4))
     for i in range(0,nx):
@@ -162,6 +164,7 @@ while t<tstop:
     pressure=np.dstack((pressure,p))
     xvelocity=np.dstack((xvelocity,u))
     
+#Pseduocolour plot function
 def varplot(variable,title):
     plt.figure()
     plt.pcolor(x,y,variable,cmap='RdBu')
